@@ -21,21 +21,23 @@ layout = html.Div([
     dbc.Container([
         dbc.Row([
             dbc.Col([ 
-                dcc.Dropdown(df_rookies["player"], '', id='rookie-dropdown', placeholder="Rookies", multi=True),
+                dcc.Dropdown(df_rookies["Joueur"], '', id='rookie-dropdown', placeholder="Rookies", multi=True),
                 dash_table.DataTable(
                     pd.DataFrame().to_dict('records'), 
                     [{"name": i, "id": i} for i in df_rookies.columns],
                     id="table-rookies",
-                    style_table={'overflowY': 'auto', }
+                    style_table={'overflowY': 'auto'},
+                    style_header={'fontSize': '10px' }
                 )
             ], width=6),
             dbc.Col([
-                dcc.Dropdown(df_seniors["player"], '', id='senior-dropdown', placeholder="Seniors", multi=True),
+                dcc.Dropdown(df_seniors["Joueur"], '', id='senior-dropdown', placeholder="Seniors", multi=True),
                 dash_table.DataTable(
                     pd.DataFrame().to_dict('records'), 
                     [{"name": i, "id": i} for i in df_seniors.columns],
                     id="table-seniors",
-                    style_table={'overflowY': 'auto', }
+                    style_table={'overflowY': 'auto', },
+                     style_header={'fontSize': '10px' }
                 ),
             ], width=6),        
         ], justify="between")
@@ -51,7 +53,7 @@ layout = html.Div([
 def update_output_table_rookies(rookie_names):
     df = []
     if rookie_names:
-        rookies = df_rookies[df_rookies["player"].isin(rookie_names)]
+        rookies = df_rookies[df_rookies["Joueur"].isin(rookie_names)]
         df.append(rookies)
     if df:
         df_filter = pd.concat(df)
@@ -68,7 +70,7 @@ def update_output_table_rookies(rookie_names):
 def update_output_table_senior(senior_names):
     df = []
     if senior_names:
-        seniors = df_seniors[df_seniors["player"].isin(senior_names)]
+        seniors = df_seniors[df_seniors["Joueur"].isin(senior_names)]
         df.append(seniors)
         
     if df:
